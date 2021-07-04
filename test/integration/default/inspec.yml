@@ -1,0 +1,7 @@
+---
+name: default
+inputs:
+  - name: expected_network_name
+  - name: expected_network_address
+  - name: expected_network_prefix
+  - name: expected_dns_enabled
