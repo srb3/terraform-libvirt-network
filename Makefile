@@ -1,36 +1,44 @@
-.PHONY: all build test out clean
+.PHONY: all build test clean
 
 SHELL = /bin/bash
 
-all: build test
+all: all_default all_override
+all_default: build_default test_default clean_default
+build_default: build_deployment_default
+test_default: test_deployment_default
+clean_default: clean_deployment_default
 
-build: build_prep_default build_default
-
-clean: clean_default
-
-build_prep_default:
+build_deployment_default:
 	@pushd examples/default; \
 	terraform init; \
-	popd
-
-build_default:
-	@pushd examples/default; \
 	terraform apply -auto-approve; \
 	popd
 
-test: test_default
-
-test_default:
+test_deployment_default:
 	cinc-auditor exec test/integration/default/ \
-		--input-file test/integration/attributes/default/attrs.yml \
-		--reporter=cli json:test-result-default-$$(date "+%Y.%m.%d-%H.%M.%S").json
+		--input-file test/integration/default/attrs.yml
 
-out_default:
+clean_deployment_default:
 	@pushd examples/default; \
-	terraform output; \
+	terraform destroy -auto-approve; \
 	popd
 
-clean_default:
-	@pushd examples/default; \
+all_override: build_override test_override clean_override
+build_override: build_deployment_override
+test_override: test_deployment_override
+clean_override: clean_deployment_override
+
+build_deployment_override:
+	@pushd examples/override; \
+	terraform init; \
+	terraform apply -auto-approve; \
+	popd
+
+test_deployment_override:
+	cinc-auditor exec test/integration/override/ \
+		--input-file test/integration/override/attrs.yml
+
+clean_deployment_override:
+	@pushd examples/override; \
 	terraform destroy -auto-approve; \
 	popd
