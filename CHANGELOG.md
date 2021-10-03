@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.2
+
+🔧 Fixes:
+
+- Readme file updated
+
+- Tests updated
+
+  ([PR #2](https://github.com/srb3/terraform-libvirt-network/pull/2))
+
 ## 0.0.1
 
 💥 Breaking changes:
