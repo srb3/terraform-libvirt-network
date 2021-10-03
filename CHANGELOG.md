@@ -8,7 +8,14 @@
 
 - Tests updated
 
-  ([PR #2](https://github.com/srb3/terraform-libvirt-network/pull/2))
+  ([PR #4](https://github.com/srb3/terraform-libvirt-network/pull/4))
+
+💥 Breaking changes:
+
+- Version of libvirt provider updated
+
+  ([PR #3](https://github.com/srb3/terraform-libvirt-network/pull/3))
+
 
 ## 0.0.1
 
